@@ -50,6 +50,14 @@ public class ruleItem {
 		return new ruleItem(word, isInclusive, isActive);
 	}
 	
+	public boolean getStatus(){
+		return isActive;
+	}
+	
+	public boolean getType(){
+		return isInclusive;
+	}
+	
 	/**
 	 * Complete constructor.
 	 */
