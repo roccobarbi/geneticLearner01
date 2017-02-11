@@ -10,7 +10,7 @@ package geneticLearner01;
 public class ruleOrganism {	
 	// Fields
 	private ruleItem rules[];
-	private int fitness; // -1 = has not been evaluated
+	private float fitness; // -1 = has not been evaluated
 	private boolean isInitialised; // 
 	
 	// Default constructor
@@ -34,6 +34,14 @@ public class ruleOrganism {
 	public ruleItem getRule(int item){
 		ruleItem output = rules[item].getRule();
 		return output;
+	}
+	
+	public void setFitness(float theFitness){
+		fitness = theFitness;
+	}
+	
+	public float getFitness(){
+		return fitness;
 	}
 	
 	/**
