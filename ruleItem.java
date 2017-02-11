@@ -45,6 +45,11 @@ public class ruleItem {
 		isInclusive = inclusive;
 	}
 	
+	// Public Accessors
+	public ruleItem getRule(){
+		return new ruleItem(word, isInclusive, isActive);
+	}
+	
 	/**
 	 * Complete constructor.
 	 */
