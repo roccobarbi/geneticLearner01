@@ -18,7 +18,7 @@ public class EvolutionEngine {
 	
 	// Private fields
 	private RuleOrganism winner;
-	private RuleOrganism bestChoices[];
+	private RuleOrganism bestChoices[]; // Not needed if I order the population and take the first ones
 	private RuleOrganism population[];
 	private boolean isActive;
 	
@@ -48,4 +48,15 @@ public class EvolutionEngine {
 	}
 	
 	// TODO: the other constructors
+	
+	/**
+	 * Run the evolution engine and return the best rule
+	 */
+	public RuleOrganism evolve(){
+		RuleOrganism winner = null;
+		// Chech that the engine is active
+		// Run the tests
+		// Return the winner
+		return winner;
+	}
 }
