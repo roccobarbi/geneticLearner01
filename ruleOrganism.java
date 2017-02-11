@@ -96,4 +96,27 @@ public class ruleOrganism {
 		}
 		return new ruleOrganism(theRules);
 	}
+	
+	/**
+	 * Applies the rules for this organism to a string
+	 * @param	message	the message that needs to be tested against the rules
+	 * @return	true if the message should be blocked, false if it should be allowed
+	 */
+	public boolean filter(String message){
+		boolean output = false; // The message is assumed good
+		// Check the negative rules
+		for(int i = 0; i < rules.length && !output; i++){
+			if(rules[i].apply(message) < 0)
+				output = true;
+		}
+		// Correct if needed with the positive rules
+		if(output){
+			for(int i = 0; i < rules.length && output; i++){
+				if(rules[i].apply(message) > 0)
+					output = true;
+			}
+		}
+		return output;
+	}
+	
 }
