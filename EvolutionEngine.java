@@ -12,6 +12,7 @@ package geneticLearner01;
  */
 
 public class EvolutionEngine {
+	
 	// Constants
 	private static final int BEST_SIZE = 3;
 	private static final int POP_SIZE = (int) Math.pow(2, BEST_SIZE) * 2;
@@ -21,6 +22,22 @@ public class EvolutionEngine {
 	private RuleOrganism bestChoices[]; // Not needed if I order the population and take the first ones
 	private RuleOrganism population[];
 	private boolean isActive;
+	
+	private TrainingItem trainingSet[];
+	private int filteredAmount; // How many items can be filtered
+	private int trainingSize; // Total size of the training set
+	
+	// Accessors
+	public void setTrainingSet(TrainingItem trainingItems[]){
+		trainingSize = trainingItems.length;
+		filteredAmount = 0;
+		trainingSet = new TrainingItem[trainingSize];
+		for(int i = 0; i < trainingSize; i++){
+			trainingSet[i] = new TrainingItem(trainingItems[i].getText(), trainingItems[i].getIsFiltered());
+			if(trainingSet[i].getIsFiltered())
+				filteredAmount++;
+		}
+	}
 	
 	// Default constructor
 	public EvolutionEngine(){
@@ -51,12 +68,20 @@ public class EvolutionEngine {
 	
 	/**
 	 * Run the evolution engine and return the best rule
+	 * @param	target	The desired % of filtered messages to be guessed
+	 * @param	maxGenerations	The maximum number of generations to be tested
 	 */
-	public RuleOrganism evolve(){
+	public RuleOrganism evolve(int target, int maxGenerations){
 		RuleOrganism winner = null;
-		// Chech that the engine is active
-		// Run the tests
-		// Return the winner
+		// Chech that the engine is active and there's a viable training set
+		if(isActive && trainingSize > 0){
+			for(int g = 0; g < maxGenerations; g++){
+				// Test all the rules and assign the fitness scores
+				// Order the set by fitness, in ascending order
+				// The first n are the best of the set, spawn and mutate them
+			}
+			// Pick a winner
+		}
 		return winner;
 	}
 }
