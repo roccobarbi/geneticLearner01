@@ -73,7 +73,7 @@ public class EvolutionEngine {
 	 */
 	public RuleOrganism evolve(int target, int maxGenerations){
 		RuleOrganism winner = null;
-		// Chech that the engine is active and there's a viable training set
+		// Check that the engine is active and there's a viable training set
 		if(isActive && trainingSize > 0){
 			for(int g = 0; g < maxGenerations; g++){
 				// Test all the rules and assign the fitness scores
