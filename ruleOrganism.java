@@ -7,23 +7,23 @@ package geneticLearner01;
  * @author WT-Rocco
  *
  */
-public class ruleOrganism {	
+public class RuleOrganism {	
 	// Fields
-	private ruleItem rules[];
+	private RuleItem rules[];
 	private float fitness; // -1 = has not been evaluated
 	private boolean isInitialised; // 
 	
 	// Default constructor
-	public ruleOrganism(){
+	public RuleOrganism(){
 		rules = null;
 		isInitialised = false;
 		fitness = -1;
 	}
 	
 	// Full constructor
-	public ruleOrganism(ruleItem[] theRules){
+	public RuleOrganism(RuleItem[] theRules){
 		this();
-		rules = new ruleItem[theRules.length];
+		rules = new RuleItem[theRules.length];
 		for(int i = 0; i < theRules.length; i++){
 			rules[i] = theRules[i];
 		}
@@ -31,8 +31,8 @@ public class ruleOrganism {
 	}
 	
 	// Public accessors
-	public ruleItem getRule(int item){
-		ruleItem output = rules[item].getRule();
+	public RuleItem getRule(int item){
+		RuleItem output = rules[item].getRule();
 		return output;
 	}
 	
@@ -63,10 +63,10 @@ public class ruleOrganism {
 	/**
 	 * Copies all the rules for the current object
 	 * 
-	 * @return	an array of ruleItem objects that copies the current one
+	 * @return	an array of RuleItem objects that copies the current one
 	 */
-	private ruleItem[] copyRules(){
-		ruleItem output[] = new ruleItem[rules.length];
+	private RuleItem[] copyRules(){
+		RuleItem output[] = new RuleItem[rules.length];
 		for(int i = 0; i < rules.length; i++){
 			output[i] = rules[i].getRule();
 		}
@@ -76,9 +76,9 @@ public class ruleOrganism {
 	/**
 	 * @return	a random mutation of the current organism.
 	 */
-	public ruleOrganism mutate(){
-		ruleItem theRules[] = copyRules();
-		ruleOrganism output = new ruleOrganism(theRules);
+	public RuleOrganism mutate(){
+		RuleItem theRules[] = copyRules();
+		RuleOrganism output = new RuleOrganism(theRules);
 		int mutationItem = (int)(Math.random() * rules.length);
 		if((int)(Math.random() * 10) == 0){ // Flips are rarer than active state mutations
 			output.flipType(mutationItem);
@@ -90,19 +90,19 @@ public class ruleOrganism {
 	
 	/**
 	 * Spawns a new generation that starts with the genetic code for the current organism
-	 * @param	organism	a second ruleOrganism
+	 * @param	organism	a second RuleOrganism
 	 * @return	a new organism that is a crossbreed of the current organism and the parameter's one
 	 */
-	public ruleOrganism spawn(ruleOrganism organism){
+	public RuleOrganism spawn(RuleOrganism organism){
 		int spawnPoint = (int) (Math.random() * rules.length);
-		ruleItem theRules[] = new ruleItem[rules.length];
+		RuleItem theRules[] = new RuleItem[rules.length];
 		for(int i = 0; i < spawnPoint; i++){
 			theRules[i] = getRule(i);
 		}
 		for(int i = spawnPoint; i < rules.length; i++){
 			theRules[i] = organism.getRule(i);
 		}
-		return new ruleOrganism(theRules);
+		return new RuleOrganism(theRules);
 	}
 	
 	/**

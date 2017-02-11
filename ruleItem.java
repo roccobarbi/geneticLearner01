@@ -15,7 +15,7 @@ package geneticLearner01;
  * @author WT-Rocco
  *
  */
-public class ruleItem {
+public class RuleItem {
 	private String word; // The word to be checked, all in lowercase
 	private boolean isActive; // true if the rule is active
 	private boolean isInclusive; // true if the rule is inclusive
@@ -23,7 +23,7 @@ public class ruleItem {
 	/**
 	 * Default constructor. Rules are assumed exclusive and inactive.
 	 */
-	public ruleItem(){
+	public RuleItem(){
 		word = "";
 		isActive = false;
 		isInclusive = false;
@@ -32,7 +32,7 @@ public class ruleItem {
 	/**
 	 * Basic constructor. Rules are assumed exclusive and inactive.
 	 */
-	public ruleItem(String theWord){
+	public RuleItem(String theWord){
 		this();
 		word = theWord;
 	}
@@ -40,14 +40,14 @@ public class ruleItem {
 	/**
 	 * Semi-complete constructor. Rules are assumed inactive
 	 */
-	public ruleItem(String theWord, boolean inclusive){
+	public RuleItem(String theWord, boolean inclusive){
 		this(theWord);
 		isInclusive = inclusive;
 	}
 	
 	// Public Accessors
-	public ruleItem getRule(){
-		return new ruleItem(word, isInclusive, isActive);
+	public RuleItem getRule(){
+		return new RuleItem(word, isInclusive, isActive);
 	}
 	
 	public boolean getStatus(){
@@ -61,7 +61,7 @@ public class ruleItem {
 	/**
 	 * Complete constructor.
 	 */
-	public ruleItem(String theWord, boolean inclusive, boolean active){
+	public RuleItem(String theWord, boolean inclusive, boolean active){
 		this(theWord, inclusive);
 		isActive = active;
 	}
