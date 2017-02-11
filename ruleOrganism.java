@@ -104,16 +104,18 @@ public class ruleOrganism {
 	 */
 	public boolean filter(String message){
 		boolean output = false; // The message is assumed good
-		// Check the negative rules
-		for(int i = 0; i < rules.length && !output; i++){
-			if(rules[i].apply(message) < 0)
-				output = true;
-		}
-		// Correct if needed with the positive rules
-		if(output){
-			for(int i = 0; i < rules.length && output; i++){
-				if(rules[i].apply(message) > 0)
+		if(isInitialised){ // Otherwise there are no rules
+			// Check the negative rules
+			for(int i = 0; i < rules.length && !output; i++){
+				if(rules[i].apply(message) < 0)
 					output = true;
+			}
+			// Correct if needed with the positive rules
+			if(output){
+				for(int i = 0; i < rules.length && output; i++){
+					if(rules[i].apply(message) > 0)
+						output = true;
+				}
 			}
 		}
 		return output;
