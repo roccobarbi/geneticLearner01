@@ -109,51 +109,11 @@ public class EvolutionEngine {
 					population[r].setFitness(fitness);
 				}
 				// Order the set by fitness, in descending order
-				sort(population);
+				RuleOrganism.sort(population);
 			}
 			winner = population[0];
 		}
 		return winner;
 	}
 	
-	/**
-	 * Sorts the current population by fitness
-	 */
-	private void sort(RuleOrganism currentSet[]){
-		if(currentSet.length > 1){
-			// Divide
-			int half = currentSet.length / 2;
-			RuleOrganism firstHalf[] = new RuleOrganism[half];
-			RuleOrganism secondHalf[] = new RuleOrganism[currentSet.length - half];
-			for(int i = 0; i < half; i++)
-				firstHalf[i] = currentSet[i];
-			for(int i = 0; i < secondHalf.length; i++)
-				secondHalf[i] = currentSet[i + half];
-			// Order recursively
-			sort(firstHalf);
-			sort(secondHalf);
-			// Merge
-			int index = 0, indexFirst = 0, indexSecond = 0;
-			while(indexFirst < firstHalf.length && indexSecond < secondHalf.length){
-				if(firstHalf[indexFirst].getFitness() > secondHalf[indexSecond].getFitness()){
-					currentSet[index] = firstHalf[indexFirst];
-					index++;
-					indexFirst++;
-				}
-				else{
-					currentSet[index] = secondHalf[indexSecond];
-					index++;
-					indexSecond++;
-				}
-			}
-			for(int j = indexFirst; j < firstHalf.length; j++){
-				currentSet[index] = firstHalf[j];
-				index++;
-			}
-			for(int j = indexSecond; j < secondHalf.length; j++){
-				currentSet[index] = secondHalf[j];
-				index++;
-			}
-		}
-	}
 }
