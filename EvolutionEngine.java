@@ -40,6 +40,7 @@ public class EvolutionEngine {
 				qtyFiltered++;
 		}
 		qtyPassed = trainingSize - qtyFiltered;
+		isActive = true;
 	}
 	
 	// Default constructor
@@ -60,7 +61,7 @@ public class EvolutionEngine {
 			for(int k = 0; k < words.length; k++){
 				isInclusive = (int)(Math.random() * 3) == 0 ? false : true;
 				isActive = (int)(Math.random() * 4) == 0 ? true : false;
-				basicRules[i] = new RuleItem(words[k], isInclusive, isActive);
+				basicRules[k] = new RuleItem(words[k], isInclusive, isActive);
 			}
 			population[i] = new RuleOrganism(basicRules);
 		}
@@ -74,7 +75,7 @@ public class EvolutionEngine {
 	 * @param	target	The desired % of filtered messages to be guessed
 	 * @param	maxGenerations	The maximum number of generations to be tested
 	 */
-	public RuleOrganism evolve(int target, int maxGenerations){
+	public RuleOrganism evolve(double target, int maxGenerations){
 		RuleOrganism winner = null;
 		int cf = 0; // Counter of elements filtered correctly
 		int cn = 0; // Counter of elements filtered by error
@@ -82,7 +83,10 @@ public class EvolutionEngine {
 		RuleOrganism tempPop [] = new RuleOrganism[POP_SIZE];
 		// Check that the engine is active and there's a viable training set
 		if(isActive && trainingSize > 0){
+			System.out.println();
+			System.out.print("[");
 			for(int g = 0; g < maxGenerations; g++){
+				if(g % 10000 == 0) System.out.print("*");
 				if(g > 0){
 					// The first n are the best of the set, spawn and mutate them
 					for(int r = 0; r < BEST_SIZE; r++){
@@ -105,12 +109,13 @@ public class EvolutionEngine {
 								cn++;
 						}
 					}
-					fitness = (cf / qtyFiltered) - (cn / qtyPassed);
+					fitness = ((float) cf / (float) qtyFiltered) - ((float) cn / (float) qtyPassed);
 					population[r].setFitness(fitness);
 				}
 				// Order the set by fitness, in descending order
 				RuleOrganism.sort(population);
 			}
+			System.out.println("]");
 			winner = population[0];
 		}
 		return winner;
